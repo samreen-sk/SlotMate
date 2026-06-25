@@ -1,0 +1,1 @@
+console.log("SlotMate Content Script Loaded");
