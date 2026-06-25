@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+
+  "name": "SlotMate",
+
+  "description": "Automatic Exam Slot Booking Assistant for Saveetha Learner",
+
+  "version": "1.0.0",
+
+  "permissions": [
+    "storage",
+    "notifications",
+    "activeTab",
+    "scripting"
+  ],
+
+  "host_permissions": [
+    "https://learner.saveetha.in/*"
+  ],
+
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "SlotMate"
+  },
+
+  "background": {
+    "service_worker": "scripts/background.js"
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "https://learner.saveetha.in/*"
+      ],
+      "js": [
+        "scripts/content.js"
+      ]
+    }
+  ]
+}
