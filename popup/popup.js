@@ -2,6 +2,12 @@ const connectButton = document.getElementById("connectBtn");
 
 connectButton.addEventListener("click", () => {
 
-    alert("SlotMate is working!");
+    chrome.storage.local.set({
+        autoBooking: true
+    }, () => {
+
+        alert("Auto Booking Enabled!");
+
+    });
 
 });
