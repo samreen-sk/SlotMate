@@ -1,27 +1,56 @@
 console.log("SlotMate Content Script Loaded");
 
-// Step 1: Find all booking cards
+// Get all exam cards
 const cards = document.querySelectorAll(".card.shadow-sm");
 
-// Print how many cards were found
 console.log("Cards Found:", cards.length);
 
+// Store all available exams
+const exams = [];
+
 // Loop through every card
-cards.forEach((card, index) => {
-
-    console.log("-----------------------");
-    console.log("Card Number:", index + 1);
-
+cards.forEach((card) => {
+    // Exam Name
     const title = card.querySelector("h5");
-
-    // Get all small text elements
+    const name = title?.innerText.trim() || "Not Found";
+    // Time & Venue
     const details = card.querySelectorAll(".text-muted.small");
 
     const time = details[0]?.innerText.trim() || "Not Found";
-    const venue = details[1]?.innerText.trim() || "Not Found";
 
-    console.log("Exam Name :", title ? title.innerText.trim() : "Not Found");
-    console.log("Time      :", time);
-    console.log("Venue     :", venue);
+    const venue = details[1]
+        ?.innerText
+        .replace("Venue:", "")
+        .trim() || "Not Found";
+    // Purpose Input
+    const purposeInput = card.querySelector('input[name="purpose"]');
+    // Book Button
+    const bookButton = card.querySelector('button[type="submit"]');
+    // Skip closed bookings
+    if (!purposeInput || !bookButton) {
+        return;
+    }
+    // Create Exam Object
+    const exam = {
+
+        name,
+
+        time,
+
+        venue,
+
+        purposeInput,
+
+        bookButton,
+
+        isOpen: true
+
+    };
+
+    exams.push(exam);
 
 });
+
+// Print final array
+console.log("Available Exams:");
+console.log(exams);
