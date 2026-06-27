@@ -12,13 +12,16 @@ cards.forEach((card, index) => {
     console.log("-----------------------");
     console.log("Card Number:", index + 1);
 
-    // Try to find the exam title
-    const title = card.querySelector("h4, h5, h3, .card-title");
+    const title = card.querySelector("h5");
 
-    if (title) {
-        console.log("Exam Name:", title.innerText.trim());
-    } else {
-        console.log("Exam Name: Not Found");
-    }
+    // Get all small text elements
+    const details = card.querySelectorAll(".text-muted.small");
+
+    const time = details[0]?.innerText.trim() || "Not Found";
+    const venue = details[1]?.innerText.trim() || "Not Found";
+
+    console.log("Exam Name :", title ? title.innerText.trim() : "Not Found");
+    console.log("Time      :", time);
+    console.log("Venue     :", venue);
 
 });
