@@ -54,3 +54,22 @@ cards.forEach((card) => {
 // Print final array
 console.log("Available Exams:");
 console.log(exams);
+// Auto Fill Purpose
+exams.forEach((exam) => {
+
+    exam.purposeInput.focus();
+
+exam.purposeInput.value = "Module Exam";
+
+exam.purposeInput.dispatchEvent(
+    new Event("input", {
+        bubbles: true
+    })
+);
+
+exam.purposeInput.dispatchEvent(
+    new Event("change", {
+        bubbles: true
+    })
+);
+});
