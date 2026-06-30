@@ -1,19 +1,21 @@
 console.log("SlotMate Content Script Loaded");
 
-// Get all exam cards
+const SETTINGS = {
+    purpose: "Module Exam",
+    maxBookings: 5
+};
+
 const cards = document.querySelectorAll(".card.shadow-sm");
 
 console.log("Cards Found:", cards.length);
 
-// Store all available exams
-const exams = [];
+const availableExams = [];
 
-// Loop through every card
 cards.forEach((card) => {
-    // Exam Name
+
     const title = card.querySelector("h5");
     const name = title?.innerText.trim() || "Not Found";
-    // Time & Venue
+
     const details = card.querySelectorAll(".text-muted.small");
 
     const time = details[0]?.innerText.trim() || "Not Found";
@@ -22,54 +24,90 @@ cards.forEach((card) => {
         ?.innerText
         .replace("Venue:", "")
         .trim() || "Not Found";
-    // Purpose Input
+
     const purposeInput = card.querySelector('input[name="purpose"]');
-    // Book Button
+
     const bookButton = card.querySelector('button[type="submit"]');
-    // Skip closed bookings
+
     if (!purposeInput || !bookButton) {
         return;
     }
-    // Create Exam Object
+
     const exam = {
-
+        card,
         name,
-
         time,
-
         venue,
-
         purposeInput,
-
         bookButton,
-
-        isOpen: true
-
+        isOpen: true,
+        selected: false,
+        booked: false,
+        priority: null
     };
 
-    exams.push(exam);
+    availableExams.push(exam);
 
 });
 
-// Print final array
-console.log("Available Exams:");
-console.log(exams);
-// Auto Fill Purpose
-exams.forEach((exam) => {
+console.table(
+    availableExams.map(exam => ({
+        Name: exam.name,
+        Time: exam.time,
+        Venue: exam.venue
+    }))
+);
+
+availableExams.forEach((exam) => {
 
     exam.purposeInput.focus();
 
-exam.purposeInput.value = "Module Exam";
+    exam.purposeInput.value = SETTINGS.purpose;
 
-exam.purposeInput.dispatchEvent(
-    new Event("input", {
-        bubbles: true
-    })
-);
+    exam.purposeInput.dispatchEvent(
+        new Event("input", {
+            bubbles: true
+        })
+    );
 
-exam.purposeInput.dispatchEvent(
-    new Event("change", {
-        bubbles: true
-    })
-);
+    exam.purposeInput.dispatchEvent(
+        new Event("change", {
+            bubbles: true
+        })
+    );
+
 });
+
+function bookExam(exam) {
+
+    if (!exam.isOpen) {
+        console.log(exam.name + " is not available for booking.");
+        return;
+    }
+
+    exam.purposeInput.focus();
+
+    exam.purposeInput.value = SETTINGS.purpose;
+
+    exam.purposeInput.dispatchEvent(
+        new Event("input", {
+            bubbles: true
+        })
+    );
+
+    exam.purposeInput.dispatchEvent(
+        new Event("change", {
+            bubbles: true
+        })
+    );
+
+    exam.bookButton.click();
+
+    exam.booked = true;
+
+    console.log("Booked: " + exam.name);
+
+}
+
+// Test only one booking
+bookExam(availableExams[0]);
