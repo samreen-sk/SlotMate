@@ -5,6 +5,7 @@ const SETTINGS = {
     maxBookings: 5
 };
 
+
 const cards = document.querySelectorAll(".card.shadow-sm");
 
 console.log("Cards Found:", cards.length);
@@ -27,7 +28,10 @@ cards.forEach((card) => {
 
     const purposeInput = card.querySelector('input[name="purpose"]');
 
-    const bookButton = card.querySelector('button[type="submit"]');
+    const actionButton = card.querySelector('button[type="submit"]');
+    const status = actionButton
+    ? actionButton.innerText.trim()
+    : "Closed";
 
     if (!purposeInput || !bookButton) {
         return;
@@ -57,6 +61,7 @@ console.table(
         Venue: exam.venue
     }))
 );
+
 
 availableExams.forEach((exam) => {
 
@@ -106,8 +111,20 @@ function bookExam(exam) {
     exam.booked = true;
 
     console.log("Booked: " + exam.name);
-
 }
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
-// Test only one booking
-bookExam(availableExams[0]);
+    if (request.action === "GET_EXAMS") {
+
+        sendResponse(
+        availableExams.map(exam => ({
+        name: exam.name,
+        time: exam.time,
+        venue: exam.venue,
+        status: exam.status
+    }))
+);
+
+    }
+
+});
