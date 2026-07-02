@@ -33,7 +33,7 @@ cards.forEach((card) => {
     ? actionButton.innerText.trim()
     : "Closed";
 
-    if (!purposeInput || !bookButton) {
+    if (!purposeInput || !actionButton) {
         return;
     }
 
@@ -43,7 +43,7 @@ cards.forEach((card) => {
         time,
         venue,
         purposeInput,
-        bookButton,
+        actionButton,
         isOpen: true,
         selected: false,
         booked: false,
@@ -106,7 +106,7 @@ function bookExam(exam) {
         })
     );
 
-    exam.bookButton.click();
+    exam.actionButton.click();
 
     exam.booked = true;
 
