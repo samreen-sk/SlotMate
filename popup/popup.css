@@ -75,3 +75,36 @@ button:hover{
     background:#1d4ed8;
 
 }
+body{
+
+    width:320px;
+
+    padding:10px;
+
+    font-family:Arial,sans-serif;
+
+}
+
+.exam-card{
+
+    border:1px solid #ccc;
+
+    padding:8px;
+
+    margin-bottom:10px;
+
+    border-radius:6px;
+
+}
+
+h4{
+
+    margin:0;
+
+}
+
+p{
+
+    margin:4px 0;
+
+}
