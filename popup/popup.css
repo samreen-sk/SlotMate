@@ -1,110 +1,65 @@
-body{
+body {
 
-    margin:0;
+    width: 340px;
 
-    width:320px;
+    padding: 10px;
 
-    background:#f5f7fb;
-
-    font-family:Arial,sans-serif;
+    font-family: Arial, sans-serif;
 
 }
 
-.container{
+.exam-card {
 
-    padding:20px;
+    border: 1px solid #d9d9d9;
 
-}
+    border-radius: 8px;
 
-h1{
+    padding: 10px;
 
-    text-align:center;
-
-    color:#2563eb;
+    margin-bottom: 10px;
 
 }
 
-.subtitle{
+.exam-header {
 
-    text-align:center;
+    display: flex;
 
-    color:#555;
+    align-items: center;
 
-}
-
-.status{
-
-    margin-top:20px;
-
-    background:white;
-
-    padding:12px;
-
-    border-radius:8px;
-
-    text-align:center;
-
-    font-weight:bold;
+    gap: 8px;
 
 }
 
-button{
+.exam-name {
 
-    margin-top:20px;
+    font-weight: bold;
 
-    width:100%;
-
-    padding:12px;
-
-    border:none;
-
-    border-radius:8px;
-
-    background:#2563eb;
-
-    color:white;
-
-    font-size:16px;
-
-    cursor:pointer;
+    font-size: 15px;
 
 }
 
-button:hover{
+.exam-time {
 
-    background:#1d4ed8;
+    margin-top: 5px;
 
-}
-body{
-
-    width:320px;
-
-    padding:10px;
-
-    font-family:Arial,sans-serif;
+    color: gray;
 
 }
 
-.exam-card{
+.exam-venue {
 
-    border:1px solid #ccc;
-
-    padding:8px;
-
-    margin-bottom:10px;
-
-    border-radius:6px;
+    margin-top: 3px;
 
 }
 
-h4{
+button {
 
-    margin:0;
+    width: 100%;
 
-}
+    margin-top: 10px;
 
-p{
+    padding: 10px;
 
-    margin:4px 0;
+    cursor: pointer;
 
 }

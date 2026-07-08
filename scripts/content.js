@@ -38,17 +38,17 @@ cards.forEach((card) => {
     }
 
     const exam = {
-        card,
-        name,
-        time,
-        venue,
-        purposeInput,
-        actionButton,
-        isOpen: true,
-        selected: false,
-        booked: false,
-        priority: null
-    };
+    card,
+    name,
+    time,
+    venue,
+    purposeInput,
+    actionButton,
+    status,
+    selected: false,
+    booked: false,
+    priority: null
+};
 
     availableExams.push(exam);
 
@@ -112,18 +112,23 @@ function bookExam(exam) {
 
     console.log("Booked: " + exam.name);
 }
+console.log("Listener Registered");
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+
+    console.log("Message received:", request);
 
     if (request.action === "GET_EXAMS") {
 
+        console.log("Sending exams:", availableExams);
+
         sendResponse(
-        availableExams.map(exam => ({
-        name: exam.name,
-        time: exam.time,
-        venue: exam.venue,
-        status: exam.status
-    }))
-);
+            availableExams.map(exam => ({
+                name: exam.name,
+                time: exam.time,
+                venue: exam.venue,
+                status: exam.status
+            }))
+        );
 
     }
 
